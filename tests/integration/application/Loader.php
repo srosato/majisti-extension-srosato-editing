@@ -97,13 +97,13 @@ final class Loader
      */
     private function updateSymlinks($lib)
     {
-        $appDir   = dirname(__DIR__);
-        $majDir   = realpath($lib . '/..');
+        $appDir   = dirname(__DIR__) . '/public';
+        $majDir   = realpath($lib . '/../public');
         $symlink  = $appDir . '/majisti';
 
-        $updateSymlink = function($majPublicDir, $symlink) {
+        $updateSymlink = function($majDir, $symlink) {
             @unlink($symlink);
-            symlink($majPublicDir, $symlink);
+            symlink($majDir, $symlink);
         };
 
         if( file_exists($symlink) ) {
@@ -114,12 +114,8 @@ final class Loader
             $updateSymlink($majDir, $symlink);
         }
 
-        if( !file_exists($appDir . '/public/majisti') ) {
-            symlink('../majisti/public', $appDir . '/public/majisti');
-        }
-
-        if( !file_exists($appDir . '/public/images/majisti') ) {
-            symlink('../majisti/images', $appDir . '/public/images/majisti');
+        if( !file_exists($appDir . '/images/majisti') ) {
+            symlink('../majisti/images', $appDir . '/images/majisti');
         }
     }
 
