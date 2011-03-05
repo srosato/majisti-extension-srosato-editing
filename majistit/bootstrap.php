@@ -22,7 +22,13 @@ $settings = array('majisti' => array(
             ),
             'adapter' => 'pdo_mysql',
             'isDefaultTableAdapter' => true,
-        )
+        ),
+        'extensions' => array('paths' => array(
+            array(
+                'namespace' => 'MajistiX',
+                'path'      => dirname(dirname(__DIR__))
+            )
+        )),
     ),
 );
 

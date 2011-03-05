@@ -8,7 +8,7 @@ $helper = \Majisti\Test\Helper::getInstance();
 $helper->setOptions($appLoader->getOptions());
 $helper->init();
 $helper->addExtension(
-    'srosato',
+    'majisti-extension-editing-srosato',
     __NAMESPACE__,
     __DIR__
 );
