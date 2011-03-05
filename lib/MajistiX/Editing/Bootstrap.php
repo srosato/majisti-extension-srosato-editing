@@ -179,7 +179,7 @@ class Bootstrap extends \Majisti\Application\Extension\AbstractBootstrap
      */
     protected function getDefaultConfiguration($maj)
     {
-        $pubUrl = $maj->find('majisti.url') . '/majistix/editing';
+        $pubUrl = $maj->find('majisti.app.url') . '/majistix-srosato-editing';
 
         return new Configuration(array(
             'editor' => 'CkEditor',
