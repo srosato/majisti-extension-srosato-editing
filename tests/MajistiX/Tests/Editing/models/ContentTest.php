@@ -1,6 +1,6 @@
 <?php
 
-namespace MajistiX\Editing\Model;
+namespace MajistiX\Tests\Editing\Model;
 
 require_once __DIR__ . '/TestHelper.php';
 

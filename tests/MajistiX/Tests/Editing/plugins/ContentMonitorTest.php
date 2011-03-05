@@ -1,6 +1,8 @@
 <?php
 
-namespace MajistiX\Editing\Plugin;
+namespace MajistiX\Tests\Editing\Plugin;
+
+use MajistiX\Editing\Plugin\ContentMonitor;
 
 require_once __DIR__ . '/TestHelper.php';
 

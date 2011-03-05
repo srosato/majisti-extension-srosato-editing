@@ -1,9 +1,13 @@
 <?php
 
-namespace MajistiX\Editing;
+namespace MajistiX\Tests\Editing;
 
 /* fallsback to parent test helper */
-require_once dirname(__DIR__) . '/../../../tests/TestHelper.php';
+require_once dirname(__DIR__) . '/../tests/TestHelper.php';
 
 $helper = \Majisti\Test\Helper::getInstance();
-$helper->addExtension(__NAMESPACE__, __DIR__);
+$helper->addExtension(
+    basename(dirname(dirname(__DIR__))),
+    __NAMESPACE__,
+    __DIR__
+);

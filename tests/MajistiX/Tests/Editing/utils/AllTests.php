@@ -1,6 +1,6 @@
 <?php
 
-namespace MajistiX\Editing\Plugin;
+namespace MajistiX\Tests\Editing;
 
 require_once __DIR__ . '/TestHelper.php';
 
@@ -8,9 +8,9 @@ class AllTests extends \Majisti\Test\TestSuite
 {
     public static function suite()
     {
-        $suite = new self('MajistiX - Editing - Plugin - All tests');
+        $suite = new self('MajistiX - Editing - Util - All tests');
 
-        $suite->addTestCase(__NAMESPACE__ . '\ContentMonitorTest');
+        $suite->addTestSuite(Filter\AllTests::suite());
         
         return $suite;
     }

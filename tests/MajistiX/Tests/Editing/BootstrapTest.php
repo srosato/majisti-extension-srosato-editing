@@ -1,6 +1,8 @@
 <?php
 
-namespace MajistiX\Editing;
+namespace MajistiX\Tests\Editing;
+
+use MajistiX\Editing\Bootstrap;
 
 require_once __DIR__ . '/TestHelper.php';
 
@@ -38,7 +40,7 @@ class BootstrapTest extends \Majisti\Test\TestCase
      * @desc Tests that loading the bootstrap will ensure
      * that a static PHP driver for the extension's models is used
      */
-    public function testBoostrapEnsuresStaticDriverUsage()
+    public function testBootstrapEnsuresStaticDriverUsage()
     {
         $em = $this->em;
         $this->bootstrap->bootstrap();
@@ -46,7 +48,7 @@ class BootstrapTest extends \Majisti\Test\TestCase
         /* @var $driverChain \Doctrine\ORM\Mapping\Driver\DriverChain */
         $driverChain = $em->getConfiguration()->getMetadataDriverImpl();
         $drivers = $driverChain->getDrivers();
-        $namespace = __NAMESPACE__ . '\Model';
+        $namespace = $this->getNamespace() . '\Model';
 
         /* ensure driver is contained in the driver chain */
         $this->assertArrayHasKey($namespace, $drivers);
@@ -69,7 +71,7 @@ class BootstrapTest extends \Majisti\Test\TestCase
         });
 
         $expectedPlugins = array(
-            __NAMESPACE__ . '\Plugin\ContentMonitor'
+            $this->getNamespace() . '\Plugin\ContentMonitor'
         );
 
         /* ensure plugin contained only once */
@@ -79,6 +81,16 @@ class BootstrapTest extends \Majisti\Test\TestCase
             $this->assertTrue(false !== array_search($key, $plugins));
             $this->assertEquals(1, $valuesCount[$key]);
         }
+    }
+
+    /**
+     * @desc Strips the Tests from the __NAMESPACE__.
+     *
+     * @return string The namespace
+     */
+    private function getNamespace()
+    {
+        return str_replace('\Tests', '', __NAMESPACE__);
     }
 }
 

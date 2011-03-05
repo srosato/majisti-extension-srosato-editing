@@ -1,8 +1,10 @@
 <?php
 
-namespace MajistiX\Editing\Util\Filter;
+namespace MajistiX\Tests\Editing\Util\Filter;
 
-use \Majisti\Config\Configuration;
+use \Majisti\Config\Configuration,
+    \MajistiX\Editing\Util\Filter\StaticUrl
+;
 
 require_once __DIR__ . '/TestHelper.php';
 

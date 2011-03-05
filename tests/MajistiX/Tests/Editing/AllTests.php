@@ -1,6 +1,6 @@
 <?php
 
-namespace MajistiX\Editing\Util\Filter;
+namespace MajistiX\Tests\Editing;
 
 require_once __DIR__ . '/TestHelper.php';
 
@@ -10,9 +10,11 @@ class AllTests extends \Majisti\Test\TestSuite
     {
         $suite = new self('MajistiX - Editing - All tests');
 
-        $suite->addTestCase(__NAMESPACE__ . '\DynamicUrlTest');
-        $suite->addTestCase(__NAMESPACE__ . '\StaticUrlTest');
+        $suite->addTestCase(__NAMESPACE__ . '\BootstrapTest');
 
+        $suite->addTestSuite(Model\AllTests::suite());
+        $suite->addTestSuite(Plugin\AllTests::suite());
+        
         return $suite;
     }
 }
