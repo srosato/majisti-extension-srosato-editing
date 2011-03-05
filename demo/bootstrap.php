@@ -10,7 +10,6 @@ $settings = array('majisti' => array(
             'majisti' => 'majisti-0.4/lib',
             'app'     => null
         ),
-        'useSymlinks' => false,
     ),
     'resources' => array(
         'db' => array(

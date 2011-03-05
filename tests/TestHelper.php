@@ -2,7 +2,7 @@
 
 namespace MajistiX\Tests\Editing;
 
-require_once dirname(__DIR__) . '/majistit/bootstrap.php';
+require_once dirname(__DIR__) . '/demo/bootstrap.php';
 
 $helper = \Majisti\Test\Helper::getInstance();
 $helper->setOptions($appLoader->getOptions());
