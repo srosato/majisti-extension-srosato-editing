@@ -2,12 +2,15 @@
 
 namespace MajistiX\Tests\Editing;
 
-/* fallsback to parent test helper */
-require_once dirname(__DIR__) . '/../tests/TestHelper.php';
+require_once dirname(__DIR__) . '/majistit/bootstrap.php';
 
 $helper = \Majisti\Test\Helper::getInstance();
+$helper->setOptions($appLoader->getOptions());
+$helper->init();
 $helper->addExtension(
-    basename(dirname(dirname(__DIR__))),
+    'srosato',
     __NAMESPACE__,
     __DIR__
 );
+
+unset($helper, $appLoader);
