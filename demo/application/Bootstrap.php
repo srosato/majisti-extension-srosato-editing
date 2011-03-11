@@ -17,7 +17,7 @@ class Bootstrap extends \Majisti\Application\Bootstrap
     {
         parent::_bootstrap($resource);
 
-        require_once 'phpQuery.php';
+        require_once 'vendor/phpquery/lib/phpQuery.php';
         \phpQuery::newDocumentXHTML();
     }
 
