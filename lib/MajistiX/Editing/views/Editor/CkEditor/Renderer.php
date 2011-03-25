@@ -21,7 +21,7 @@ class Renderer extends AbstractEditor
      */
     public function getPublicFiles(Configuration $majisti)
     {
-        $jsUrl       = $majisti->find('app.url') . '/srosato-editing';
+        $jsUrl       = $majisti->find('app.baseUrl') . '/srosato-editing';
         $ckeditorUrl = $jsUrl . '/editors/ckeditor';
 
         /* concrete editor always loaded last */
