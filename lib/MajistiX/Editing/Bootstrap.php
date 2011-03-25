@@ -52,10 +52,12 @@ class Bootstrap extends \Majisti\Application\Extension\AbstractBootstrap
         /* @var $driverChain ORM\Mapping\Driver\DriverChain */
         $driverChain = $this->_em->getConfiguration()->getMetadataDriverImpl();
 
-        $driverChain->addDriver(
-            $this->createMetadataDriver(),
-            __NAMESPACE__ . '\Model'
-        );
+        $driverImpl = $this->_em->getConfiguration()->newDefaultAnnotationDriver();
+        $driverImpl->addPaths(array(
+            __DIR__ . '/models'
+        ));
+
+        $driverChain->addDriver($driverImpl, __NAMESPACE__ . '\Model');
     }
 
     /**
@@ -137,19 +139,6 @@ class Bootstrap extends \Majisti\Application\Extension\AbstractBootstrap
         return $this->getApplication()
                     ->getBootstrap()
                     ->getResource('view');
-    }
-
-    /**
-     * @desc Inits the table name. Assumes majisti.app.namespace . _content
-     * if no table name given in the configuration.
-     */
-    protected function _initTableName()
-    {
-        $config = $this->getConfiguration();
-
-        Model\Content::setTableName(
-            $config->find('table', 'majistix_editing_content')
-        );
     }
 
     /**

@@ -13,15 +13,39 @@ use \Doctrine\ORM\Mapping\ClassMetadata,
  *
  * @author Majisti
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ *
+ * @entity(repositoryClass="MajistiX\Editing\Model\ContentRepository")
+ * @table(name="ext_content")
  */
 class Content
 {
+    /**
+     * @id @column(name="id", type="integer")
+     * @generatedValue
+     * 
+     * @var int id 
+     */
     protected $id;
 
+    /**
+     * @column(name="name", type="string")
+     *
+     * @var string name
+     */
     protected $name;
 
+    /**
+     * @column(name="content", type="text")
+     *
+     * @var string content
+     */
     protected $content = '';
 
+    /**
+     * @column(name="locale", type="string")
+     *
+     * @var string locale
+     */
     protected $locale;
 
     protected $_options;
@@ -45,45 +69,6 @@ class Content
     {
         $this->name = $name;
         $this->locale = $locale->getLanguage();
-    }
-
-    static public function setTableName($tableName)
-    {
-        static::$_tableName = $tableName;
-    }
-
-    /**
-     * @desc Maps this entity.
-     *
-     * @param ClassMetadata $metadata The metadata
-     */
-    public static function loadMetadata(ClassMetadata $metadata)
-    {
-        $metadata->mapField(array(
-           'id' => true,
-           'fieldName' => 'id',
-           'type' => 'integer',
-        ));
-
-        $metadata->mapField(array(
-           'fieldName' => 'name',
-           'type' => 'string'
-        ));
-
-        $metadata->mapField(array(
-           'fieldName' => 'content',
-           'type' => 'text'
-        ));
-
-        $metadata->mapField(array(
-           'fieldName' => 'locale',
-           'type' => 'string'
-        ));
-
-        $metadata->setTableName(static::$_tableName);
-        $metadata->setIdGeneratorType(ClassMetadata::GENERATOR_TYPE_AUTO);
-        $metadata->setCustomRepositoryClass(
-            __NAMESPACE__ . '\ContentRepository');
     }
 
     /**
