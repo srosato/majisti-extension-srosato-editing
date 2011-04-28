@@ -5,6 +5,8 @@
  * @author Majisti
  */
 
+$lorem = new \Majisti\Util\Model\LoremIpsumGenerator();
+
 $content = pq('<div />')
     ->append(pq('<a />')
         ->attr('href', $this->url(array('controller' => 'auth')))
@@ -20,6 +22,7 @@ $content = pq('<div />')
     /* editors */
     ->append($this->editing('content1'))
     ->append($this->editing('content2', 'basic'))
+    ->append($this->editing('content3', 'basic', $lorem->getContent(30)))
 ;
 
 $this->setRenderReturn($content);

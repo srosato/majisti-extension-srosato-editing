@@ -10,7 +10,11 @@ class Provider
 
     protected $_view;
 
+    protected $_role = 'guest';
+
     protected $_editor;
+
+    protected $_acl;
 
     protected function __construct()
     {}
@@ -43,6 +47,20 @@ class Provider
         $this->_view = $view;
 
         return $this;
+    }
+
+    public function setAcl(\Zend_Acl $acl)
+    {
+        $this->_acl = $acl;
+    }
+
+    public function getAcl()
+    {
+        if ( null === $this->_acl ) {
+            $this->_acl = new \Zend_Acl();
+        }
+
+        return $this->_acl;
     }
 
     /**
@@ -80,6 +98,16 @@ class Provider
         return $this->_editor;
     }
 
+    public function setRole($role)
+    {
+        $this->_role = $role;
+    }
+
+    public function getRole()
+    {
+        return $this->_role;
+    }
+
     public function createEditorDisplay(Content $model, $options = array())
     {
         $editor = $this->getEditor();
@@ -90,6 +118,7 @@ class Provider
             $editor->setOptions($options);
         }
 
-        return new Display($model, $editor, $this->getView());
+        return new Display($model, $editor, $this->getView(), $this->getAcl(),
+            $this->getRole());
     }
 }

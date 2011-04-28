@@ -28,19 +28,36 @@ class Display
     /**
      * @var string
      */
+    protected $_role;
+
+    /**
+     * @var string
+     */
     protected $_partial = 'majistix/editing/editor.phtml';
 
     public function __construct(Model\Content $content, IEditor $editor,
-        \Zend_View $view)
+        \Zend_View $view, \Zend_Acl $acl, $role)
     {
         $this->_content = $content;
         $this->_editor  = $editor;
         $this->_view    = $view;
+        $this->_acl     = $acl;
+        $this->_role    = $role;
     }
 
     public function getContent()
     {
         return $this->_content;
+    }
+
+    public function getRole()
+    {
+        return $this->_role;
+    }
+
+    public function getAcl()
+    {
+        return $this->_acl;
     }
 
     public function getView()
@@ -80,17 +97,21 @@ EOT;
         $editor  = $this->getEditor();
         $view    = $this->getView();
         $content = $this->getContent();
+        $acl     = $this->getAcl();
+        $role    = $this->getRole();
 
-        if( !\Zend_Auth::getInstance()->hasIdentity() ) {
+        if( $acl->hasRole($role) &&
+            $acl->isAllowed($role, 'majisti-editing-content', 'edit') )
+        {
+            $view->inlineScript()->appendScript(
+                $this->getJavascript($content, $editor));
+
+            return $view->partial($this->getPartial(), array(
+                'editor'  => $editor,
+                'content' => $content,
+            ));
+        } else {
             return $content->getContent();
         }
-
-        $view->inlineScript()->appendScript(
-            $this->getJavascript($content, $editor));
-
-        return $view->partial($this->getPartial(), array(
-            'editor'  => $editor,
-            'content' => $content,
-        ));
     }
 }

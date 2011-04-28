@@ -33,6 +33,20 @@ class Bootstrap extends \Majisti\Application\Bootstrap
         $front = $this->getResource('FrontController');
         $front->registerPlugin(new \MajistiT\Plugin\Main());
 
+        $acl = new \Zend_Acl();
+        $acl->addRole('guest')
+            ->addRole('member', 'guest');
+        $acl->addResource('majisti-editing-content');
+        $acl->allow('member', 'majisti-editing-content', 'edit');
+
+        $auth = \Zend_Auth::getInstance();
+        $role = $auth->hasIdentity()
+            ? 'member'
+            : 'guest';
+        $provider = \MajistiX\Editing\View\Editor\Provider::getInstance();
+        $provider->setRole($role);
+        $provider->setAcl($acl);
+
         parent::run();
     }
 }

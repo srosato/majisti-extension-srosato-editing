@@ -19,10 +19,12 @@ class Editing extends \Majisti\View\Helper\AbstractHelper
     /**
      * @desc Renders content based on storage key.
      *
-     * @param $key The storage key
-     * @param $options the options
+     * @param string $key The storage key
+     * @param array $options the options
+     * @param string $initialContent The initial content
      */
-    public function helper($key, $options = array())
+    public function helper($key, $options = array(),
+        $initialContent = null)
     {
         $provider = Editor\Provider::getInstance();
 
@@ -30,6 +32,10 @@ class Editing extends \Majisti\View\Helper\AbstractHelper
         $model = $key instanceof Content
                ? $key
                : $this->getModel($key);
+
+        if( null !== $initialContent && 0 === strlen($model->getContent()) ) {
+            $model->setContent($initialContent);
+        }
 
         $display = $provider->createEditorDisplay($model, $options);
 
