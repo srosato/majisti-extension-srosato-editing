@@ -3,6 +3,7 @@
 namespace MajistiX\Editing\Plugin;
 
 use \Majisti\Application\Locales,
+    \MajistiX\Editing\View\Editor\Provider,
     \Zend_Controller_Action_HelperBroker as HelperBroker;
 
 /**
@@ -36,7 +37,12 @@ class ContentMonitor extends \Majisti\Controller\Plugin\AbstractPlugin
                 /* @var $json \Zend_Controller_Action_Helper_Json */
                 $json = HelperBroker::getStaticHelper('json');
 
-                if( !\Zend_Auth::getInstance()->hasIdentity() ) {
+                $provider = Provider::getInstance();
+
+                $acl = $provider->getAcl();
+                $role = $provider->getRole();
+
+                if( !$acl->isAllowed($role, 'majisti-editing-content', 'edit') ) {
                     $json->direct(array(
                         'result'  => 'failure',
                         'message' => 'Permission denied.'

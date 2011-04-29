@@ -1,8 +1,11 @@
+.maj-editing-container {
+  position: relative;
+}
 .maj-editing-container > .message {
   font-weight: bold;
 }
 .maj-editing-container > .message.success {
-  background: url('../images/icons-16x16.png?1297036651') no-repeat;
+  background: url('../images/icons-16x16.png?1302751790') no-repeat;
   width: 16px;
   height: 16px;
   overflow: hidden;
@@ -13,7 +16,7 @@
   padding: 0 0 0 21px;
 }
 .maj-editing-container > .message.loading {
-  background: url('../images/ajax-loader.gif?1294378656');
+  background: url('../images/ajax-loader.gif?1302751790');
   width: 200px;
   height: 19px;
 }
@@ -28,7 +31,7 @@
 }
 .maj-editing-container > .text-wrapper > .panel {
   display: none;
-  background: url('../images/icons-16x16.png?1297036651') no-repeat;
+  background: url('../images/icons-16x16.png?1302751790') no-repeat;
   width: 16px;
   height: 16px;
   overflow: hidden;
@@ -43,12 +46,14 @@
 }
 .maj-editing-container > .editor {
   display: none;
+  z-index: 9999;
+  clear: left;
 }
 .maj-editing-container > .editor table.group tr {
   float: left;
 }
 .maj-editing-container > .editor .save, .maj-editing-container > .editor .cancel {
-  background: url('../images/icons-16x16.png?1297036651') no-repeat;
+  background: url('../images/icons-16x16.png?1302751790') no-repeat;
   width: 16px;
   height: 16px;
   overflow: hidden;

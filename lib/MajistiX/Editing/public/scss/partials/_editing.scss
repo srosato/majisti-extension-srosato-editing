@@ -11,6 +11,7 @@ $sprite-image-default-height: 16px;
 }
 
 @mixin editing() {
+    position: relative;
     > .message {
         font-weight: bold;
         &.success {
@@ -52,6 +53,8 @@ $sprite-image-default-height: 16px;
     }
     > .editor {
         display: none;
+        z-index: 9999;
+        clear: left;
         table.group tr { //align buttons
             float: left;
         }
